@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",                          
     "outDir": "lib",
-    "sourceMap": true,
+    "sourceMap": false,
     "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
     "moduleResolution": "node",    
     /* Strict Type-Checking Options */

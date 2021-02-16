@@ -1,4 +1,4 @@
-import { Executor, LoadingMsg, RepoName, TagName, AppName, FileActionsResult, InquirerPromptResult, FileActions } from "./types"
+import { Executor, LoadingMsg, RepoName, TagName, AppName, FileActionsResult, InquirerPromptResult, FileActions } from "../types"
 import Metalsmith from "metalsmith"
 const fs = require('fs-extra')
 const path = require('path');
@@ -13,7 +13,7 @@ const {
 const downloadGitRepo = promisify(require('download-git-repo'));
 const {
   downloadDirectory,
-} = require('./constants');
+} = require('../constants');
 const {
   render,
 } = promisify(require('consolidate').ejs);
@@ -31,7 +31,6 @@ const fetchRepoList = async (): Promise<Array<any>> => {
 };
 // 2.获取项目的tag列表
 const fetchTagList = async (repo: string) => {
-  console.log(repo);
   const {
     data,
   } = await axios.get(`https://api.github.com/repos/Tiny-CLI-Template/${repo}/tags`);
@@ -55,7 +54,6 @@ const download = async (repo: RepoName, tag?: TagName) => {
   const dest = `${downloadDirectory}/${repo}`;
   console.log(dest)
   await downloadGitRepo(api, dest);
-  console.log("dest done")
   return dest;
 };
 // 前置目录检查
@@ -100,7 +98,6 @@ module.exports = async (projectName: AppName) => {
   
   const res = await beforeCreate(projectName)
   if (res.exit) {
-    
     return
   }
   
@@ -113,7 +110,7 @@ module.exports = async (projectName: AppName) => {
   } = await Inquirer.prompt({
     name: 'repo', // 获取选择后的结果
     type: 'list', // 什么方式显示在命令行
-    message: '请选择一个模板创建项目',
+    message: `请选择一个${chalk.red('模板')}创建项目`,
     choices: repos,
   });
   // 2. 获取对应的版本号,通过当前选择的项目 拉去对应的版本
@@ -125,13 +122,12 @@ module.exports = async (projectName: AppName) => {
   } = await Inquirer.prompt({
     name: 'tag',
     type: 'list',
-    message: 'please choise tags to create project',
+    message: `请选择模板${chalk.red('版本号')}[tag]`,
     choices: tags,
   });
   // 3. 把模版放到一个临时目录里存好,以备后期使用(使用 download-git-repo)
   const result = await waitFnloading(download, 'download template')(repo, tag);
 
-  // 把template(临时目录) 下的文件 ，拷贝到执行命令的目录下
   // 4. 拷贝操作，若模板目录中带有 ask.js文件则为复杂模板渲染
   if (!fs.pathExistsSync(path.join(result, 'ask.js'))) {
     await fs.copy(result, path.resolve(projectName));
@@ -154,10 +150,10 @@ module.exports = async (projectName: AppName) => {
         .use((files: any, metal: any, done: any) => {
           const obj = metal.metadata();
           Reflect.ownKeys(files).forEach(async (file: any) => {
-            // 这个是要处理的
-            if (file.includes('json')) {
+            // 这个是要处理的后缀，此处仅处理 package.json
+            if (file.endsWith('.json') || file.endsWith('.html')) {
               let content = files[file].contents.toString(); // 文件内容
-              if (content.includes('<%')) {
+              if (content.includes('<%=') && content.includes('%>')) {
                 content = await render(content, obj);
                 files[file].contents = Buffer.from(content); // 渲染
               }

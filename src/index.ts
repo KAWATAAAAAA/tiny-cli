@@ -1,3 +1,6 @@
+// command dispatcher
+
+import { command } from "commander";
 import { MapAction } from "./types"
 const program = require('commander');
 const path = require('path');
@@ -6,17 +9,23 @@ const path = require('path');
 const mapActions:MapAction = {
   create: {
     alias: 'c',
-    description: 'create a project',
+    description: '创建并初始化一个项目',
     examples: [
-      'xsfe-cli create <app-name>',
+      'xsfe create <app-name>',
     ],
   },
-  config: {
-    alias: 'conf',
-    description: 'config project variable',
+  serve: {
+    alias: 's',
+    description: '通过Vite启动本地服务',
     examples: [
-      'xsfe-cli config set <k><v>',
-      'xsfe-cli config get <k>',
+      'xsfe serve',
+    ],
+  },
+  build: {
+    alias: 'b',
+    description: '通过Vite编译构建生产资源',
+    examples: [
+      'xsfe build [--mode=<env>]',
     ],
   },
   '*': {
@@ -49,7 +58,8 @@ Object.keys(mapActions).forEach((action:string) => {
          * @slice 截取命令行中的第三个参数 xxx 当做项目名称
          * @action 直接用文件名作为执行命名的动作名称
          */
-        require(path.resolve(__dirname, action))(...process.argv.slice(3));
+        //console.log(path.resolve(__dirname, `commands/${action}`))
+        require(path.resolve(__dirname, `commands/${action}`))(...process.argv.slice(3));
       }
     });
 });
