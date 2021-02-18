@@ -1,8 +1,13 @@
 # Tiny-Cli
 
+## Features
 
-## 1.必备模块
+- 💡 拉取项目开发模板
+- ⚡️ 继承vite特性，本地dev 秒开
+- 📦 无需书写任何配置可以直接在模板项目中build
+- 🛠️ build 支持 option 两种方式，esm 与 legacy
 
+## Dev dependencies module
 
 - **commander** ：参数解析 --help其实就借助了他
 - **inquirer** ：交互式命令行工具，可以实现命令行的选择功能
@@ -11,7 +16,7 @@
 - **metalsmith** ：读取所有文件,实现模板渲染
 - **consolidate** :  统一模板引擎 
 
-目前实现的功能:
+## 目前实现的功能:
 
 ```js
 /* 根据模板初始化项目 */ 
@@ -19,10 +24,10 @@ xsfe create <app-name>
 /* 启用本地服务 */ 
 xsfe serve
 /* 构建生成代码 */
-xsfe build
+xsfe build [option]
 ```
 
-## 2.工程创建
+## Project view
 
 - src 文件目录
 
@@ -32,7 +37,7 @@ xsfe build
 │   ├── build.ts
 │   ├── create.ts
 │   └── serve.ts
-├── constants.ts  // 常量存放
+├── constants.ts  
 ├── index.ts // 入口
 ├── plugins // 插件
 │   ├── rollup-plugin-build-state.ts
@@ -44,19 +49,23 @@ xsfe build
 </pre>
 
 
-### 项目发布
+### Project publish
 
 ```js
 nrm use npm  // 准备发布包
 npm addUser  // 填写账号密码
-npm publish  // 已经发布成功
+npm login // 填写账户，密码
+npm owner add [username] [package name] // 给别人开权限
+npm publish  // 发布
 ```
 
 ### 脚手架按需引入 
-
+所需插件：（以后有需求再做）
 https://github.com/anncwb/vite-plugin-style-import
 
+## Debug
 
+debug 方式使用`.vscode` 下的文件启动 ts-node 调试,调试的时候记得把 `tsconfig.json` 下的 `sourceMap` 打开
 
 
 

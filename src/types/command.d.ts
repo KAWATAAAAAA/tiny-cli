@@ -9,3 +9,10 @@ export declare interface CommandInfo{
     description: string,
     examples: Array<string>
 }
+
+declare const enum BuildMode{
+    ESM = "esnext",
+    Leagacy = "legacy"
+}
+
+

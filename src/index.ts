@@ -1,12 +1,13 @@
 // command dispatcher
-
 import { command } from "commander";
 import { MapAction } from "./types"
-const program = require('commander');
-const path = require('path');
-
-/* 配置命令 */ 
-const mapActions:MapAction = {
+const { Command } = require('commander');
+const program = new Command()
+const chalk = require("chalk")
+const createCommand = require("./commands/create")
+const serveCommand = require("./commands/serve")
+const buildCommand:(mode?:string) => void = require("./commands/build")
+const mapActions: MapAction = {
   create: {
     alias: 'c',
     description: '创建并初始化一个项目',
@@ -25,8 +26,8 @@ const mapActions:MapAction = {
     alias: 'b',
     description: '通过Vite编译构建生产资源',
     examples: [
-      'xsfe build [--mode=<env>]',
-    ],
+      'xsfe build [--mode <env>]',
+    ]
   },
   '*': {
     alias: '',
@@ -35,43 +36,54 @@ const mapActions:MapAction = {
   },
 };
 
-const COMMAND_HELP = ():void => {
-    console.log('\nExamples:');
-    Object.keys(mapActions).forEach((action) => {
-      mapActions[action].examples.forEach((example) => {
-        console.log(`${example}`);
-      });
+const COMMAND_HELP = (): void => {
+  console.log('\nExamples:');
+  Object.keys(mapActions).forEach((action) => {
+    mapActions[action].examples.forEach((example) => {
+      console.log(`${example}`);
     });
-  }
-/* 配置命令信息 */ 
-Object.keys(mapActions).forEach((action:string) => {
-  program
-    .command(action) // 配置命令的名字
-    .alias(mapActions[action].alias) // 命令的别名
-    .description(mapActions[action].description) // 命令对应的描述
-    .action(() => {
-      if (action === '*') {
-        console.log(mapActions[action].description);
-      } else {
-        /**
-         * xsfe-cli create xxx 
-         * @slice 截取命令行中的第三个参数 xxx 当做项目名称
-         * @action 直接用文件名作为执行命名的动作名称
-         */
-        //console.log(path.resolve(__dirname, `commands/${action}`))
-        require(path.resolve(__dirname, `commands/${action}`))(...process.argv.slice(3));
-      }
-    });
-});
-/* 监听用户的help事件 */ 
-program.on('--help',COMMAND_HELP);
-program.on('-h',COMMAND_HELP);
-
+  });
+}
+program
+  .command("create")
+  .alias("c")
+  .description("创建并初始化一个项目")
+  .action(() => {
+    //require(path.resolve(__dirname, `commands/create`))(...process.argv.slice(3));
+    createCommand(...process.argv.slice(3))
+  })
+program
+  .command("serve")
+  .alias("s")
+  .description("通过Vite启动本地服务")
+  .action(() => {
+    serveCommand(...process.argv.slice(3))
+  })
+program
+  .command("build")
+  .alias("b")
+  .description("通过Vite编译构建生产资源")
+  .option('-m, --mode [mode]', "build for esnext or legacy browser,default 'esnext' ")
+  .action((option: any, options: any) => {
+    buildCommand(option.mode)
+  })
 
 // 导入版本号
 const {
   version,
 } = require('./constants');
-// 解析用户传递过来的参数
-// program.parse(process.argv);
-program.version(version).parse(process.argv);
+
+/* 监听用户的help事件 */
+program.on('--help', COMMAND_HELP);
+program.on('-h', COMMAND_HELP);
+
+program.addHelpText('after',
+  `${chalk.green("Run")} ${chalk.cyan("xsfe <command> --help")} ${chalk.green("for detailed usage of given command")}`
+)
+/* 设置脚手架版本信息 */
+program.version(version)
+/* 最后一步：将用户传递过来的参数解析为对应的 command */
+program.parse(process.argv);
+
+
+
