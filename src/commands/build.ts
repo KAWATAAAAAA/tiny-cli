@@ -1,9 +1,12 @@
 import rollupPluginBuildState from "../plugins/rollup-plugin-build-state";
 import { InlineConfig } from "vite";
 import legacy from "@vitejs/plugin-legacy";
-import { BuildMode } from "../types/command";
 import vue from "@vitejs/plugin-vue";
 import { babel } from "@rollup/plugin-babel";
+declare const enum BuildMode {
+  ESM = "esnext",
+  Leagacy = "legacy",
+}
 const rollupPluginWrite = require("../plugins/rollup-plugin-write");
 const { build } = require("vite");
 const path = require("path");

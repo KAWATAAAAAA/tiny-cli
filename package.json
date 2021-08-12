@@ -12,7 +12,7 @@
   "bin": {
     "haya": "./bin/index.js"
   },
-  "types": "src/types/index.d.ts",
+  "types": "/types/index.d.ts",
   "keywords": [
     "vite",
     "cli",

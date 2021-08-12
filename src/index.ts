@@ -1,12 +1,21 @@
 // command dispatcher
-import { command } from "commander";
-import { MapAction } from "./types";
 const { Command } = require("commander");
 const program = new Command();
 const chalk = require("chalk");
 const createCommand = require("./commands/create");
 const serveCommand = require("./commands/serve");
 const buildCommand: (mode?: string) => void = require("./commands/build");
+declare interface MapAction {
+  create: CommandInfo;
+  [key: string]: CommandInfo;
+}
+
+declare interface CommandInfo {
+  alias: string;
+  description: string;
+  examples: Array<string>;
+}
+
 const mapActions: MapAction = {
   create: {
     alias: "c",

@@ -1,13 +1,3 @@
-import {
-  Executor,
-  LoadingMsg,
-  RepoName,
-  TagName,
-  AppName,
-  FileActionsResult,
-  InquirerPromptResult,
-  FileActions,
-} from "../types";
 import Metalsmith from "metalsmith";
 const fs = require("fs-extra");
 const path = require("path");
@@ -20,6 +10,24 @@ const { promisify } = require("util");
 const downloadGitRepo = promisify(require("download-git-repo"));
 const { downloadDirectory } = require("../constants");
 const { render } = promisify(require("consolidate").ejs);
+declare type RepoName = string;
+declare type TagName = string;
+declare type AppName = string;
+declare type Executor = Function;
+declare type LoadingMsg = string;
+declare interface FileActions {
+  Overwrite: () => void;
+  Merge: () => void;
+  Cancel: () => void;
+  [key: string]: Function;
+}
+declare interface FileActionsResult {
+  exit: boolean;
+}
+declare interface InquirerPromptResult {
+  [key: string]: string;
+}
+
 /**
  * create的所有逻辑 haya create <app-name>
  * 拉取仓库所有项目，列出让用户选 安装哪个项目 haya create <app-name>

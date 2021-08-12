@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",                          
+    "target": "es5",                    
     "outDir": "lib",
     "sourceMap": false,
     "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
@@ -12,6 +12,8 @@
     "typeRoots": [
       "./node_modules/@types/"
     ],
+    "declaration": true,
+    "declarationDir": "types",
     /* Advanced Options */
     "skipLibCheck": true,                     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
