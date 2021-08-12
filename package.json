@@ -1,5 +1,5 @@
 {
-  "name": "tiny-cli",
+  "name": "haya-cli",
   "version": "1.0.0",
   "description": "based on the latest Tooling Vite for dev and production",
   "main": "./dist/index.js",
