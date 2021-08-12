@@ -68,4 +68,11 @@ https://github.com/anncwb/vite-plugin-style-import
 debug 方式使用`.vscode` 下的文件启动 ts-node 调试,调试的时候记得把 `tsconfig.json` 下的 `sourceMap` 打开
 
 
+## 本地测试流程
+
+```bash
+npm run dev
+npm link
+xsfe -h
+``` 
 

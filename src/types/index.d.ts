@@ -1,2 +1,2 @@
-export * from "./create"
-export * from "./command"
+export * from "./create";
+export * from "./command";
