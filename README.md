@@ -1,5 +1,5 @@
 # Haya-Cli
-使用前缀是通过全局安装（npm haya-cli -g）后输入 haya 唤醒。
+使用前缀是通过全局安装（npm i haya-cli -g）后输入 haya 唤醒。
 哈雅 名字来源于日语的 hayai  (はやい)（速い）干净利落快速的意思
 仓库名称是 tiny-cli ，项目名称修改为了haya，因为npm 上已经有一个这个包了，....
 ## Features
