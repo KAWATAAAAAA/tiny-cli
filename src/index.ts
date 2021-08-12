@@ -11,17 +11,17 @@ const mapActions: MapAction = {
   create: {
     alias: "c",
     description: "创建并初始化一个项目",
-    examples: ["xsfe create <app-name>"],
+    examples: ["haya create <app-name>"],
   },
   serve: {
     alias: "s",
     description: "通过Vite启动本地服务",
-    examples: ["xsfe serve"],
+    examples: ["haya serve"],
   },
   build: {
     alias: "b",
     description: "通过Vite编译构建生产资源",
-    examples: ["xsfe build [--mode <env>]"],
+    examples: ["haya build [--mode <env>]"],
   },
   "*": {
     alias: "",
@@ -74,7 +74,7 @@ program.on("-h", COMMAND_HELP);
 
 program.addHelpText(
   "after",
-  `${chalk.green("Run")} ${chalk.cyan("xsfe <command> --help")} ${chalk.green(
+  `${chalk.green("Run")} ${chalk.cyan("haya <command> --help")} ${chalk.green(
     "for detailed usage of given command"
   )}`
 );

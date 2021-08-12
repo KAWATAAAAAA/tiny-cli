@@ -1,5 +1,6 @@
 # Tiny-Cli
-
+项目名称是 tiny-cli ，使用前缀是通过全局安装（npm tiny-cli -g）后输入 haya 。
+哈雅 名字来源于日语的 hayai  (はやい)（速い）干净利落快速的意思
 ## Features
 
 - 💡 拉取项目开发模板
@@ -20,11 +21,11 @@
 
 ```js
 /* 根据模板初始化项目 */ 
-xsfe create <app-name>
+haya create <app-name>
 /* 启用本地服务 */ 
-xsfe serve
+haya serve
 /* 构建生成代码 */
-xsfe build [option]
+haya build [option]
 ```
 
 ## Project view
@@ -73,6 +74,6 @@ debug 方式使用`.vscode` 下的文件启动 ts-node 调试,调试的时候记
 ```bash
 npm run dev
 npm link
-xsfe -h
+haya -h
 ``` 
 

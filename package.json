@@ -1,6 +1,6 @@
 {
   "name": "tiny-cli",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "based on the latest Tooling Vite for dev and production",
   "main": "./dist/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "build": "tsc"
   },
   "bin": {
-    "xsfe": "./bin/index.js"
+    "haya": "./bin/index.js"
   },
   "types": "src/types/index.d.ts",
   "keywords": [
