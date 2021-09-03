@@ -2,6 +2,7 @@ declare const Command: any;
 declare const program: any;
 declare const chalk: any;
 declare const createCommand: any;
+declare const installCommand: any;
 declare const serveCommand: any;
 declare const buildCommand: (mode?: string) => void;
 declare interface MapAction {

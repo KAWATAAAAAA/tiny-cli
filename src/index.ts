@@ -3,6 +3,7 @@ const { Command } = require("commander");
 const program = new Command();
 const chalk = require("chalk");
 const createCommand = require("./commands/create");
+const installCommand = require("./commands/install");
 const serveCommand = require("./commands/serve");
 const buildCommand: (mode?: string) => void = require("./commands/build");
 declare interface MapAction {
@@ -54,6 +55,16 @@ program
   .action(() => {
     //require(path.resolve(__dirname, `commands/create`))(...process.argv.slice(3));
     createCommand(...process.argv.slice(3));
+  });
+program
+  .command("install")
+  .alias("i")
+  .description("代理npm安装")
+  .option("-D, --dev", "指定安装到 devDependencies")
+  .option("-S, --save", "指定安装到 dependencies")
+  .action((option: any) => {
+    //require(path.resolve(__dirname, `commands/create`))(...process.argv.slice(3));
+    installCommand(...process.argv.slice(3), option);
   });
 program
   .command("serve")

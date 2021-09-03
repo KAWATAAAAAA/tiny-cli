@@ -1,7 +1,8 @@
 //import { name as appName, version as appVersion} from "./package.json"
-const { safeRequire } = require("../utils/index");
+
+import Utils from "../utils/index";
 const path = require("path");
-const pkg = safeRequire(`${path.resolve(process.cwd(), "package.json")}`);
+const pkg = Utils.safeRequire(`${path.resolve(process.cwd(), "package.json")}`);
 const appName = pkg ? pkg.name : "demo";
 const appVersion = pkg ? pkg.version : "0.0.0";
 const fs = require("fs-extra");
