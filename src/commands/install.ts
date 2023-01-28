@@ -14,11 +14,11 @@ declare interface EachIterator {
   originObject: Record<string, any>;
 }
 module.exports = (arg: string, mode: Mode) => {
-  const pkg = require(`${process.cwd()}/package.json`);
-  console.log(chalk.green("🌵 正在由HaYa-CLI代理安装 npm 包...."));
-
-  Utils.each(pkg.dependencies, eachHandler);
-  Utils.each(pkg.devDependencies, eachHandler);
+  // const pkg = require(`${process.cwd()}/package.json`);
+  console.log(chalk.green("🌵 正在由Hextech-CLI代理安装 npm 包...."));
+  console.log(chalk.green("🌵 原理就是 npmrc scope: https://docs.npmjs.com/cli/v7/configuring-npm/npmrc/#comments"));
+  // Utils.each(pkg.dependencies, eachHandler);
+  // Utils.each(pkg.devDependencies, eachHandler);
 };
 
 function eachHandler({ key, originObject }: EachIterator) {

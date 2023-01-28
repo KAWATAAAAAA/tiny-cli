@@ -2,8 +2,8 @@
 
 ### Features
 
-- haya create <app-name>
-- haya serve
-- haya build
+- hex create <app-name>
+- hex serve
+- hex build
 
 ### BugFix

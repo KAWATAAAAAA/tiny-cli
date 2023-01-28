@@ -1,5 +1,5 @@
 {
-  "name": "haya-cli",
+  "name": "hextech-cli",
   "version": "1.0.0",
   "description": "based on the latest Tooling Vite for dev and production",
   "main": "./dist/index.js",
@@ -10,7 +10,7 @@
     "build": "tsc"
   },
   "bin": {
-    "haya": "./bin/index.js"
+    "hex": "./bin/index.js"
   },
   "types": "/types/index.d.ts",
   "keywords": [
@@ -33,6 +33,7 @@
     "mockjs": "^1.1.0",
     "prettier": "^2.3.2",
     "ts-node": "^9.1.1",
+    "tsc-watch": "^4.5.0",
     "typescript": "^4.1.5",
     "vite-plugin-style-import": "^0.7.3"
   },

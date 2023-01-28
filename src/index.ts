@@ -21,17 +21,22 @@ const mapActions: MapAction = {
   create: {
     alias: "c",
     description: "创建并初始化一个项目",
-    examples: ["haya create <app-name>"],
+    examples: ["hex create <app-name>"],
   },
   serve: {
     alias: "s",
     description: "通过Vite启动本地服务",
-    examples: ["haya serve"],
+    examples: ["hex serve"],
   },
   build: {
     alias: "b",
     description: "通过Vite编译构建生产资源",
-    examples: ["haya build [--mode <env>]"],
+    examples: ["hex build [--mode <env>]"],
+  },
+  install: {
+    alias: "i",
+    description: "代理安装npm包",
+    examples: ["hex i"],
   },
   "*": {
     alias: "",
@@ -49,6 +54,10 @@ const COMMAND_HELP = (): void => {
   });
 };
 program
+  .name(`${chalk.green("🌵 欢迎使用 hextech-cli ✨")}`)
+  .usage("hex [command] [--options]");
+
+program
   .command("create")
   .alias("c")
   .description("创建并初始化一个项目")
@@ -59,7 +68,7 @@ program
 program
   .command("install")
   .alias("i")
-  .description("代理npm安装")
+  .description("代理安装npm包")
   .option("-D, --dev", "指定安装到 devDependencies")
   .option("-S, --save", "指定安装到 dependencies")
   .action((option: any) => {
@@ -94,7 +103,7 @@ program.on("-h", COMMAND_HELP);
 
 program.addHelpText(
   "after",
-  `${chalk.green("Run")} ${chalk.cyan("haya <command> --help")} ${chalk.green(
+  `${chalk.green("Run")} ${chalk.cyan("hex <command> --help")} ${chalk.green(
     "for detailed usage of given command"
   )}`
 );

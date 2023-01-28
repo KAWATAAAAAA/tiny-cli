@@ -29,8 +29,8 @@ declare interface InquirerPromptResult {
 }
 
 /**
- * create的所有逻辑 haya create <app-name>
- * 拉取仓库所有项目，列出让用户选 安装哪个项目 haya create <app-name>
+ * create的所有逻辑 hex create <app-name>
+ * 拉取仓库所有项目，列出让用户选 安装哪个项目 hex create <app-name>
  * 选完后 在显示所有的版本号 1.0
  * 可能还需要用户配置一些数据 来结合生成 app 模板
  * */
